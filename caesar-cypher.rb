@@ -33,19 +33,18 @@ def caesar_cypher!(text, shift = 13)
 
   0.upto(text.length - 1) do |i|
 
-    puts text[i]
+    char = text[i].downcase
 
-    unless abcs.include?(text[i].downcase)
-      out_text += text[i]
+    unless abcs.include?(char)
       next
     end
-
+    
     capital = text[i] == text[i].upcase
 
-    text[i] = abcs[((abcs.find_index(text[i].downcase) + shift) % 26)]
+    text[i] = abcs[((abcs.find_index(char) + shift) % 26)]
 
     if capital
-      text[i].upcase!
+      text[i] = text[i].upcase
     end
   end
 
@@ -53,8 +52,9 @@ def caesar_cypher!(text, shift = 13)
 
 end
 
-str = "Hello World!"
+loop
+  print "Something to Encode: "
+  str = gets.chomp
 
-caesar_cypher!(str)
-
-puts str
+  caesar_cypher!(str)
+  puts str
