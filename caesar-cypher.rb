@@ -52,9 +52,10 @@ def caesar_cypher!(text, shift = 13)
 
 end
 
-loop
+loop do
   print "Something to Encode: "
   str = gets.chomp
 
   caesar_cypher!(str)
   puts str
+end
