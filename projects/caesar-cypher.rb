@@ -52,10 +52,14 @@ def caesar_cypher!(text, shift = 13)
 
 end
 
-loop do
-  print "Something to Encode: "
-  str = gets.chomp
+if __FILE__ == $0
 
-  caesar_cypher!(str)
-  puts str
+  loop do
+    print "Something to Encode: "
+    str = gets.chomp
+
+    caesar_cypher!(str)
+    puts str
+  end
+  
 end
