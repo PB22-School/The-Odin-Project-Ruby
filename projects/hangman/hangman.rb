@@ -160,13 +160,13 @@ class Game
   def is_game_over?
 
     if @health <= 0
-      puts "You Ran Out Of Health!"
+      puts "You Ran Out Of Guesses!"
       puts "The Word Was : #{@secret_word}!!!"
       return true
     end
 
     0.upto(@secret_word.length - 1) do |i|
-      unless @letters.include?(@secret_word[i])
+      unless @letters.include?(@secret_word[i].upcase)
         return false
       end
     end
@@ -182,14 +182,11 @@ class Game
 
     save_obj = YAML::load(serialized)
 
-    puts save_obj
-
     @secret_word = save_obj.secret_word
     @letters = save_obj.letters
     @health = save_obj.health
 
   end
-
 
 end
 
