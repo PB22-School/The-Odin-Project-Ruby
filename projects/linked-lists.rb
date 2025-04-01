@@ -252,52 +252,55 @@ def should_equal(ex1, ex2, name)
   puts
 end
 
-ll = LinkedList.new
+if __FILE__ == $0
 
-can_append = "CAN APPEND"
+  ll = LinkedList.new
 
-should_equal(ll.to_s, "nil", "CAN PRINT")
+  can_append = "CAN APPEND"
 
-ll.append(1)
+  should_equal(ll.to_s, "nil", "CAN PRINT")
 
-should_equal(ll.to_s, "( 1 ) -> nil", can_append)
+  ll.append(1)
 
-ll.append(2)
+  should_equal(ll.to_s, "( 1 ) -> nil", can_append)
 
-should_equal(ll.to_s, "( 1 ) -> ( 2 ) -> nil", can_append)
+  ll.append(2)
 
-ll.append(3)
+  should_equal(ll.to_s, "( 1 ) -> ( 2 ) -> nil", can_append)
 
-should_equal(ll.to_s, "( 1 ) -> ( 2 ) -> ( 3 ) -> nil", can_append)
+  ll.append(3)
 
-ll.prepend(0)
+  should_equal(ll.to_s, "( 1 ) -> ( 2 ) -> ( 3 ) -> nil", can_append)
 
-should_equal(ll.to_s, "( 0 ) -> ( 1 ) -> ( 2 ) -> ( 3 ) -> nil", "CAN PREPEND")
+  ll.prepend(0)
 
-should_equal(ll.size, 4, "CAN GET SIZE")
+  should_equal(ll.to_s, "( 0 ) -> ( 1 ) -> ( 2 ) -> ( 3 ) -> nil", "CAN PREPEND")
 
-should_equal(ll.head.value, 0, "CAN GET HEAD")
+  should_equal(ll.size, 4, "CAN GET SIZE")
 
-should_equal(ll.tail.value, 3, "CAN GET TAIL")
+  should_equal(ll.head.value, 0, "CAN GET HEAD")
 
-should_equal(ll.at(2).value, 2, "CAN GET AT(INDEX)")
+  should_equal(ll.tail.value, 3, "CAN GET TAIL")
 
-should_equal(ll.pop.value, 3, "CAN POP")
+  should_equal(ll.at(2).value, 2, "CAN GET AT(INDEX)")
 
-should_equal(ll.to_s, "( 0 ) -> ( 1 ) -> ( 2 ) -> nil", "POP CAN DELETE")
+  should_equal(ll.pop.value, 3, "CAN POP")
 
-should_equal(ll.contains?(2), true, "CAN DO CONTAINS")
+  should_equal(ll.to_s, "( 0 ) -> ( 1 ) -> ( 2 ) -> nil", "POP CAN DELETE")
 
-should_equal(ll.contains?(5), false, "CAN DO DOES NOT CONTAIN")
+  should_equal(ll.contains?(2), true, "CAN DO CONTAINS")
 
-should_equal(ll.find(2), 2, "CAN FIND VALUE")
+  should_equal(ll.contains?(5), false, "CAN DO DOES NOT CONTAIN")
 
-should_equal(ll.find(5), nil, "CAN DETERMINE NO VALUE EXISTS")
+  should_equal(ll.find(2), 2, "CAN FIND VALUE")
 
-ll.insert_at(5, 1)
+  should_equal(ll.find(5), nil, "CAN DETERMINE NO VALUE EXISTS")
 
-should_equal(ll.to_s, "( 0 ) -> ( 5 ) -> ( 1 ) -> ( 2 ) -> nil", "CAN INSERT AT")
+  ll.insert_at(5, 1)
 
-ll.remove_at(2)
+  should_equal(ll.to_s, "( 0 ) -> ( 5 ) -> ( 1 ) -> ( 2 ) -> nil", "CAN INSERT AT")
 
-should_equal(ll.to_s, "( 0 ) -> ( 5 ) -> ( 2 ) -> nil", "CAN REMOVE AT")
+  ll.remove_at(2)
+
+  should_equal(ll.to_s, "( 0 ) -> ( 5 ) -> ( 2 ) -> nil", "CAN REMOVE AT")
+end
