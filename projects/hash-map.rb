@@ -29,13 +29,10 @@ class HashMap
     hash_code = hash(key) % @capacity
     bucket = get_bucket(hash_code)
 
-    # if I were making this for real, I'd make a new linked list that supported two values, (key, value).
-    # But I just did that exercise and I don't feel like making a new linked list type.
-
     if bucket == nil
 
       if length >= @capacity * @load_factor
-        (@capacity * 2).times { @buckets << nil }
+        (@capacity).times { @buckets << nil }
         @capacity *= 2
       end
 
