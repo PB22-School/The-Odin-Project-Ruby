@@ -248,31 +248,36 @@ class Tree
 
   end
 
-  def level_order(node = @root, first_call = false, &block)
+  def level_order(node = @root, &block)
 
-    if first_call
-      block.yield node.data
-      return
+    if not block
+      ret_arr = []
     end
 
-    if node == @root
-      block.yield node.data
+    queue = []
+    queue.push(node)
+
+    while queue.size != 0
+      current_node = queue.shift
+
+      if not block
+        ret_arr.push(current_node.data)
+      else
+        block.yield current_node.data
+      end
+
+      if current_node.left
+        queue.push(current_node.left)
+      end
+
+      if current_node.right
+        queue.push(current_node.right)
+      end
+
     end
 
-    if node.left
-      level_order(node.left, true, block)
-    end
-
-    if node.right
-      level_order(node.right, true, block)
-    end
-
-    if node.left
-      level_order(node.left, false, block)
-    end
-
-    if node.right
-      level_order(node.right, false, block)
+    if not block
+      return ret_arr
     end
 
   end
@@ -283,11 +288,11 @@ class Tree
     block.yield node
 
     if node.left
-      preorder(node.left, block)
+      preorder(node.left, &block)
     end
 
     if node.right
-      preorder(node.right, block)
+      preorder(node.right, &block)
     end
   end
 
@@ -295,13 +300,13 @@ class Tree
   def inorder(node = @root, &block)
     
     if node.left
-      inorder(node.left, block)
+      inorder(node.left, &block)
     end
 
     block.yield node
 
     if node.right
-      inorder(node.right, block)
+      inorder(node.right, &block)
     end
 
   end
@@ -310,11 +315,11 @@ class Tree
   def postorder(node = @root, &block)
 
     if node.left
-      postorder(node.left, block)
+      postorder(node.left, &block)
     end
 
     if node.right
-      postorder(node.right, block)
+      postorder(node.right, &block)
     end
 
     block.yield node
@@ -395,7 +400,6 @@ class Tree
     build_tree(new_arr)
   end
 
-
   # from a student of the Odin Project:
   def pretty_print
     @root.pretty_print
@@ -411,13 +415,24 @@ tree.pretty_print
 puts tree.balanced?
 
 puts "level order: "
-tree.level_order { |node| puts data }
+arr = []
+tree.level_order { |data| arr.push(data) }
+p arr
 
 puts "pre: "
-tree.preorder { |node| puts node.data }
+arr = []
+tree.preorder { |node| arr.push(node.data) }
+p arr
 
 puts "in order: "
-tree.inorder { |node| puts node.data }
+arr = []
+tree.inorder { |node| arr.push(node.data) }
+p arr
+
+puts "post order:"
+arr = []
+tree.postorder { |node| arr.push(node.data) }
+p arr
 
 5.times do 
   tree.insert(rand(101..200))
@@ -432,11 +447,24 @@ tree.rebalance
 puts "Should be true: "
 puts tree.balanced?
 
+tree.pretty_print
+
 puts "level order: "
-tree.level_order { |node| puts node.data }
+arr = []
+tree.level_order { |data| arr.push(data) }
+p arr
 
 puts "pre: "
-tree.preorder { |node| puts node.data }
+arr = []
+tree.preorder { |node| arr.push(node.data) }
+p arr
 
 puts "in order: "
-tree.inorder { |node| puts node.data }
+arr = []
+tree.inorder { |node| arr.push(node.data) }
+p arr
+
+puts "post order:"
+arr = []
+tree.postorder { |node| arr.push(node.data) }
+p arr
